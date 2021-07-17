@@ -19,7 +19,7 @@ import {Texture} from "three";
 
     const uniforms = {
         u_resolution: uniformOf(
-            (w : number, h : number) => new THREE.Vector3(w, h, w / h)
+            (w : number, h : number) => new THREE.Vector3(w, h, Math.min(w, h))
         ),
         u_time: uniformOf(
             (v : number) => v
@@ -39,6 +39,7 @@ import {Texture} from "three";
             uniforms
         })
     );
+    canvas.material.transparent = true;
 
     await init();
     await initUniforms();
@@ -65,9 +66,9 @@ import {Texture} from "three";
         uniforms.u_resolution.set(w, h);
         uniforms.u_time.set(0);
         uniforms.u_texture.set(
-            await textureLoader.loadAsync("resources/2a.png")
+            await textureLoader.loadAsync("resources/4LEPZ_EDdEI.jpg")
         );
-        uniforms.u_speed.set(-2);
+        uniforms.u_speed.set(10);
     }
 
     function addObjects() {
